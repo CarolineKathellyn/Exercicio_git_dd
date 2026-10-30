@@ -2,7 +2,7 @@ package tdd.triangulo;
 
 public class Triangulo {
 
-    public static TipoTriangulo classificar(int a, int b, int c) {
+    public TipoTriangulo classificar(int a, int b, int c) {
         if (!formaTriangulo(a, b, c)) {
             return TipoTriangulo.INVALIDO;
         }
@@ -15,7 +15,7 @@ public class Triangulo {
         return TipoTriangulo.ESCALENO;
     }
 
-    private static boolean formaTriangulo(int a, int b, int c) {
+    private boolean formaTriangulo(int a, int b, int c) {
         boolean todosPositivos = a > 0 && b > 0 && c > 0;
         // long evita estouro de int ao somar lados muito grandes
         return todosPositivos

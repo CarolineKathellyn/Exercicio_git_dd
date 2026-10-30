@@ -12,61 +12,63 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class TrianguloTest {
 
+    private final Triangulo triangulo = new Triangulo();
+
     @Test
     void escalenoValido() {
-        assertEquals(TipoTriangulo.ESCALENO, Triangulo.classificar(3, 4, 5));
+        assertEquals(TipoTriangulo.ESCALENO, triangulo.classificar(3, 4, 5));
     }
 
     @Test
     void isoscelesValido() {
-        assertEquals(TipoTriangulo.ISOSCELES, Triangulo.classificar(5, 5, 3));
+        assertEquals(TipoTriangulo.ISOSCELES, triangulo.classificar(5, 5, 3));
     }
 
     @Test
     void equilateroValido() {
-        assertEquals(TipoTriangulo.EQUILATERO, Triangulo.classificar(3, 3, 3));
+        assertEquals(TipoTriangulo.EQUILATERO, triangulo.classificar(3, 3, 3));
     }
 
     @ParameterizedTest
     @CsvSource({"5, 5, 3", "5, 3, 5", "3, 5, 5"})
     void isoscelesValidoComPermutacaoDosMesmosValores(int a, int b, int c) {
-        assertEquals(TipoTriangulo.ISOSCELES, Triangulo.classificar(a, b, c));
+        assertEquals(TipoTriangulo.ISOSCELES, triangulo.classificar(a, b, c));
     }
 
     @ParameterizedTest
     @CsvSource({"0, 4, 5", "4, 0, 5", "4, 5, 0"})
     void umValorZeroEInvalido(int a, int b, int c) {
-        assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(a, b, c));
+        assertEquals(TipoTriangulo.INVALIDO, triangulo.classificar(a, b, c));
     }
 
     @ParameterizedTest
     @CsvSource({"-3, 4, 5", "3, -4, 5", "3, 4, -5"})
     void umValorNegativoEInvalido(int a, int b, int c) {
-        assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(a, b, c));
+        assertEquals(TipoTriangulo.INVALIDO, triangulo.classificar(a, b, c));
     }
 
     @ParameterizedTest
     @MethodSource("permutacoesDe123")
     void somaDeDoisLadosIgualAoTerceiroEInvalido(int a, int b, int c) {
-        assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(a, b, c));
+        assertEquals(TipoTriangulo.INVALIDO, triangulo.classificar(a, b, c));
     }
 
     @ParameterizedTest
     @MethodSource("permutacoesDe124")
     void somaDeDoisLadosMenorQueOTerceiroEInvalido(int a, int b, int c) {
-        assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(a, b, c));
+        assertEquals(TipoTriangulo.INVALIDO, triangulo.classificar(a, b, c));
     }
 
     @Test
     void tresValoresZeroEInvalido() {
-        assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(0, 0, 0));
+        assertEquals(TipoTriangulo.INVALIDO, triangulo.classificar(0, 0, 0));
     }
 
     @Test
     void ladosMuitoGrandesNaoEstouramOInt() {
         assertEquals(
             TipoTriangulo.EQUILATERO,
-            Triangulo.classificar(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE));
+            triangulo.classificar(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
     static Stream<Arguments> permutacoesDe123() {
