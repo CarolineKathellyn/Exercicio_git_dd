@@ -62,6 +62,13 @@ class TrianguloTest {
         assertEquals(TipoTriangulo.INVALIDO, Triangulo.classificar(0, 0, 0));
     }
 
+    @Test
+    void ladosMuitoGrandesNaoEstouramOInt() {
+        assertEquals(
+            TipoTriangulo.EQUILATERO,
+            Triangulo.classificar(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE));
+    }
+
     static Stream<Arguments> permutacoesDe123() {
         return permutacoes(1, 2, 3);
     }
